@@ -4,8 +4,8 @@ const char* ssid = "changethis";
 const char* pwd = "changethis";
 int led = 2;
 int currentStatus = LOW;
-long currentMillis = 0;
-long millibegin = 0;
+unsigned long currentMillis = 0;
+unsigned long millibegin = 0;
 
 void setup() {
   Serial.begin(115200);
