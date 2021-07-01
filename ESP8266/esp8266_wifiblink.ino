@@ -1,7 +1,7 @@
 #include <ESP8266WiFi.h>
 #include <ESP8266HTTPClient.h>
-const char* ssid = "changethis";
-const char* pwd = "changethis";
+const char* ssid = "<changethis>";
+const char* pwd = "<changethis>";
 int led = 2;
 int currentStatus = LOW;
 unsigned long currentMillis = 0;
@@ -27,23 +27,25 @@ void loop() {
   {
     return ;
   }
-
+  
   currentMillis = millis();
 
   if(currentMillis - millibegin < 6000) //delay(6000) simulator
   {
+   // Serial.println("Running ");
+    //Serial.println("Wait for " + (currentMillis - millibegin));
     return ;
   }
   else
   {
     millibegin = currentMillis; //new begin time to cmpare the next 6 seconds
   }
-  
+  //Serial.println("completed six seconds...");
 
   HTTPClient http;
   WiFiClient client;
   String payload;
-  http.begin(client, "changethis");
+  http.begin(client, "<url>");
   int httpCode = http.GET();
   if(httpCode >0)
   {
@@ -54,15 +56,16 @@ void loop() {
 
   if(payload == "false" && currentStatus != HIGH)
   {
+   //Serial.println("false condition met and current status is high");
     digitalWrite(led, HIGH);
     currentStatus = HIGH;
     Serial.println("switched off");
   }
   if(payload == "true" && currentStatus != LOW)
   {
+    //Serial.println("true condition and currentstatus is not low");
     digitalWrite(led, LOW);
     currentStatus = LOW;
     Serial.println("Switched on");
   }
-
 }
